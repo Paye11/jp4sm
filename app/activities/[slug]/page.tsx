@@ -3,11 +3,34 @@ import Image from 'next/image'
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import { ArrowRight, ArrowLeft, CheckCircle2, Quote } from 'lucide-react'
+import ctyHeroImage from '../../../images/CTY/CTY1.jpeg'
+import ctyImage2 from '../../../images/CTY/cty2.jpeg'
+import ctyImage3 from '../../../images/CTY/cty3.jpeg'
+import ctyImage4 from '../../../images/CTY/cty4.jpeg'
+import ctyImage5 from '../../../images/CTY/cty5.jpeg'
+import ctyImage6 from '../../../images/CTY/cty6.jpeg'
+import ctyImage7 from '../../../images/CTY/cty7.jpeg'
+import ctyImage8 from '../../../images/CTY/cty8.jpeg'
+import ctyImage9 from '../../../images/CTY/cty9.jpeg'
+import ctyImage10 from '../../../images/CTY/cty10.jpeg'
 import { PageHero } from '@/components/page-hero'
 import { Reveal } from '@/components/reveal'
 import { CtaBand } from '@/components/cta-band'
 import { Button } from '@/components/ui/button'
 import { activities, getActivity } from '@/lib/nav'
+
+const ctyGallery = [
+  ctyHeroImage,
+  ctyImage2,
+  ctyImage3,
+  ctyImage4,
+  ctyImage5,
+  ctyImage6,
+  ctyImage7,
+  ctyImage8,
+  ctyImage9,
+  ctyImage10,
+]
 
 export function generateStaticParams() {
   return activities.map((a) => ({ slug: a.slug }))
@@ -37,6 +60,7 @@ export default async function ActivityDetailPage({
   if (!activity) notFound()
 
   const others = activities.filter((a) => a.slug !== slug).slice(0, 3)
+  const isCatchThemYoung = slug === 'catch-them-young'
 
   return (
     <>
@@ -127,6 +151,49 @@ export default async function ActivityDetailPage({
           </div>
         </div>
       </section>
+
+      {isCatchThemYoung ? (
+        <section className="bg-background py-24">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="text-center">
+              <Reveal>
+                <p className="font-heading text-sm font-semibold uppercase tracking-wider text-gold">
+                  CTY Moments
+                </p>
+              </Reveal>
+              <Reveal delay={1}>
+                <h2 className="mt-3 font-heading text-3xl font-bold text-foreground text-balance sm:text-4xl">
+                  Catch Them Young in action
+                </h2>
+              </Reveal>
+              <Reveal delay={2}>
+                <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-muted-foreground">
+                  These moments reflect how JP4SM reaches children and young people
+                  with Christ-centered teaching, joyful fellowship, mentorship,
+                  and life-shaping encouragement.
+                </p>
+              </Reveal>
+            </div>
+
+            <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {ctyGallery.map((image, index) => (
+                <Reveal key={`cty-gallery-${index}`} delay={(index % 3) as 0 | 1 | 2} as="article">
+                  <div className="group overflow-hidden rounded-3xl border border-border bg-card shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl">
+                    <div className="relative aspect-[4/3] overflow-hidden">
+                      <Image
+                        src={image}
+                        alt={`Catch Them Young ministry moment ${index + 1}`}
+                        fill
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       {/* Other activities */}
       <section className="bg-background py-24">
