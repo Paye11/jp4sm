@@ -13,6 +13,13 @@ import ctyImage7 from '../../../images/CTY/cty7.jpeg'
 import ctyImage8 from '../../../images/CTY/cty8.jpeg'
 import ctyImage9 from '../../../images/CTY/cty9.jpeg'
 import ctyImage10 from '../../../images/CTY/cty10.jpeg'
+import crusadeSlide1 from '../../../images/slides/slide1.jpeg'
+import crusadeSlide2 from '../../../images/slides/slide2.jpeg'
+import crusadeSlide3 from '../../../images/slides/slide3.jpeg'
+import crusadeSlide4 from '../../../images/slides/slide4.jpeg'
+import crusadeSlide5 from '../../../images/slides/slide5.jpeg'
+import crusadeSlide6 from '../../../images/slides/slide6.jpeg'
+import { ActivityImageSlideshow } from '@/components/activity-image-slideshow'
 import { PageHero } from '@/components/page-hero'
 import { Reveal } from '@/components/reveal'
 import { CtaBand } from '@/components/cta-band'
@@ -30,6 +37,15 @@ const ctyGallery = [
   ctyImage8,
   ctyImage9,
   ctyImage10,
+]
+
+const crusadeSlides = [
+  { src: crusadeSlide1, alt: 'People gathered during a large outdoor crusade' },
+  { src: crusadeSlide2, alt: 'Crusade worship and ministry moment with attendees' },
+  { src: crusadeSlide3, alt: 'Open-air crusade audience listening to the gospel' },
+  { src: crusadeSlide4, alt: 'Prayer and response during a crusade meeting' },
+  { src: crusadeSlide5, alt: 'Crusade crowd taking part in worship together' },
+  { src: crusadeSlide6, alt: 'Another powerful moment from a JP4SM crusade gathering' },
 ]
 
 export function generateStaticParams() {
@@ -61,6 +77,7 @@ export default async function ActivityDetailPage({
 
   const others = activities.filter((a) => a.slug !== slug).slice(0, 3)
   const isCatchThemYoung = slug === 'catch-them-young'
+  const isCrusade = slug === 'crusade'
 
   return (
     <>
@@ -99,6 +116,31 @@ export default async function ActivityDetailPage({
           </Reveal>
         </div>
       </section>
+
+      {isCrusade ? (
+        <section className="bg-secondary/40 py-24">
+          <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
+            <Reveal>
+              <div>
+                <p className="font-heading text-sm font-semibold uppercase tracking-wider text-gold">
+                  Crusade Gallery
+                </p>
+                <h2 className="mt-3 font-heading text-3xl font-bold text-foreground text-balance sm:text-4xl">
+                  A living picture of revival, worship, and Gospel response
+                </h2>
+                <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
+                  These images capture the atmosphere of our crusade ministry:
+                  people gathering in faith, hearing the word of God, responding
+                  in worship, and encountering Jesus Christ in powerful ways.
+                </p>
+              </div>
+            </Reveal>
+            <Reveal delay={1}>
+              <ActivityImageSlideshow slides={crusadeSlides} />
+            </Reveal>
+          </div>
+        </section>
+      ) : null}
 
       {/* Scripture */}
       <section className="bg-primary py-20">

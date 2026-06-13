@@ -123,10 +123,6 @@ export default function HomePage() {
             </Reveal>
           </div>
         </div>
-        <div className="pointer-events-none absolute bottom-8 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 text-primary-foreground/60 lg:flex">
-          <span className="text-xs uppercase tracking-widest">Scroll</span>
-          <span className="h-10 w-px animate-pulse bg-primary-foreground/40" />
-        </div>
       </section>
 
       {/* Mission statement */}
