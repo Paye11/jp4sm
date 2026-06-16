@@ -104,14 +104,14 @@ export const activities: ActivityItem[] = [
     ],
   },
   {
-    title: 'Vocational Bible Studies',
+    title: 'Vacation Bible School (VBS)',
     slug: 'vocational-bible-studies',
     short:
       'Equipping believers with scripture and practical skills for life and ministry.',
     image: missionToYouthImage,
     tagline: 'Faith and skill, working hand in hand',
     intro:
-      'Our Vocational Bible Studies blend deep biblical teaching with practical life and trade skills. We believe a transformed life touches every sphere — spiritual, social, and economic. This ministry empowers believers to grow in the Word while gaining tools to thrive and serve their communities.',
+      'Our Vacation Bible School (VBS) helps children and young people grow in the Word of God through Bible lessons, worship, fellowship, and engaging learning activities. This ministry creates a joyful Christ-centered environment where lives are shaped early and faith is strengthened.',
     scripture:
       'Whatever you do, work heartily, as for the Lord and not for men.',
     scriptureRef: 'Colossians 3:23',
