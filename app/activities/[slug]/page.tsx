@@ -196,6 +196,81 @@ export default async function ActivityDetailPage({
 
       {isCatchThemYoung ? (
         <section className="bg-background py-24">
+          <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-8">
+            <Reveal>
+              <div>
+                <p className="font-heading text-sm font-semibold uppercase tracking-wider text-gold">
+                  CTY Vision
+                </p>
+                <h2 className="mt-3 font-heading text-3xl font-bold text-foreground text-balance sm:text-4xl">
+                  Reaching campuses, schools, and young people with direction and hope
+                </h2>
+                <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
+                  Catch Them Young is focused on students in universities,
+                  vocational schools, and high schools, as well as out-of-school
+                  youth with the potential to pursue education. We intentionally
+                  walk with young people who lack guidance and financial support,
+                  helping them grow in Christ and move toward a hopeful future.
+                </p>
+              </div>
+            </Reveal>
+            <Reveal delay={1}>
+              <div className="rounded-3xl border border-border bg-card p-8 shadow-sm">
+                <p className="text-sm font-semibold uppercase tracking-wider text-gold">
+                  Who We Reach
+                </p>
+                <ul className="mt-5 space-y-4 text-muted-foreground">
+                  <li className="flex gap-3">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
+                    <span>University students seeking spiritual grounding and wise direction.</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
+                    <span>Students in vocational schools preparing for work and life.</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
+                    <span>High school students navigating identity, purpose, and growth.</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
+                    <span>Out-of-school youth with the potential to return to learning and thrive.</span>
+                  </li>
+                </ul>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      ) : null}
+
+      {isCatchThemYoung ? (
+        <section className="bg-secondary/30 py-24">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="rounded-[2rem] border border-primary/10 bg-primary px-8 py-10 text-primary-foreground shadow-xl sm:px-10">
+              <Reveal>
+                <p className="font-heading text-sm font-semibold uppercase tracking-wider text-gold">
+                  Our Goal
+                </p>
+              </Reveal>
+              <Reveal delay={1}>
+                <h2 className="mt-3 font-heading text-3xl font-bold text-balance sm:text-4xl">
+                  Raise Christ-centered leaders who know who they are and where they are going
+                </h2>
+              </Reveal>
+              <Reveal delay={2}>
+                <p className="mt-5 max-w-4xl text-lg leading-relaxed text-primary-foreground/85">
+                  CTY exists to shape a generation of young leaders on campus and
+                  in their communities who are rooted in Christ, confident in
+                  their identity, and prepared to lead with wisdom, faith, and purpose.
+                </p>
+              </Reveal>
+            </div>
+          </div>
+        </section>
+      ) : null}
+
+      {isCatchThemYoung ? (
+        <section className="bg-background py-24">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
               <Reveal>
@@ -210,9 +285,9 @@ export default async function ActivityDetailPage({
               </Reveal>
               <Reveal delay={2}>
                 <p className="mx-auto mt-5 max-w-3xl text-lg leading-relaxed text-muted-foreground">
-                  These moments reflect how JP4SM reaches children and young people
-                  with Christ-centered teaching, joyful fellowship, mentorship,
-                  and life-shaping encouragement.
+                  These moments reflect how JP4SM walks with students and young
+                  people through discipleship, guidance, support, and the kind
+                  of encouragement that helps them grow with clarity and purpose.
                 </p>
               </Reveal>
             </div>

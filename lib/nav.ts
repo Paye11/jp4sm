@@ -134,26 +134,26 @@ export const activities: ActivityItem[] = [
     title: 'Catch Them Young (CTY)',
     slug: 'catch-them-young',
     short:
-      'Reaching teenagers and youth with the gospel before the world claims them.',
+      'Campus outreach and discipleship for students and young people who need Christ-centered direction and support.',
     image: catchThemYoungImage,
-    tagline: 'Winning a generation while hearts are tender',
+    tagline: 'Raising Christ-centered leaders on campus and in the community',
     intro:
-      'Catch Them Young (CTY) is our dedicated outreach to teenagers and young people. We meet youth in schools, neighborhoods, and gatherings with relevant, engaging, and Christ-centered programs — discipling them early so they grow into bold, grounded followers of Jesus.',
+      'Catch Them Young (CTY) is our campus outreach and discipleship program reaching students across universities, vocational schools, high schools, and out-of-school youth with the potential to pursue education. We walk with young people who lack guidance and financial support, helping them grow in Christ, discover purpose, and move forward with confidence.',
     scripture:
       'Remember now thy Creator in the days of thy youth.',
     scriptureRef: 'Ecclesiastes 12:1',
     highlights: [
       {
-        title: 'School Outreach',
-        text: 'Bringing the Gospel into schools through relevant programs.',
+        title: 'Mentoring',
+        text: 'Biblical discipleship and life skills that help young people face real-world challenges with wisdom and faith.',
       },
       {
-        title: 'Youth Camps',
-        text: 'Immersive experiences that ignite passion and build community.',
+        title: 'Guidance',
+        text: 'Academic and career direction that helps students discover their path so potential does not go to waste.',
       },
       {
-        title: 'Mentorship',
-        text: 'Guiding young people through the challenges of growing up in faith.',
+        title: 'Support',
+        text: 'Connecting students to resources, scholarships, and encouraging community that stands with them.',
       },
     ],
   },
