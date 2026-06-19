@@ -78,6 +78,7 @@ export default async function ActivityDetailPage({
   const others = activities.filter((a) => a.slug !== slug).slice(0, 3)
   const isCatchThemYoung = slug === 'catch-them-young'
   const isCrusade = slug === 'crusade'
+  const isVbs = slug === 'vocational-bible-studies'
 
   return (
     <>
@@ -193,6 +194,76 @@ export default async function ActivityDetailPage({
           </div>
         </div>
       </section>
+
+      {isVbs ? (
+        <section className="bg-background py-24">
+          <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[1.1fr_0.9fr] lg:px-8">
+            <Reveal>
+              <div>
+                <p className="font-heading text-sm font-semibold uppercase tracking-wider text-gold">
+                  VBS Focus
+                </p>
+                <h2 className="mt-3 font-heading text-3xl font-bold text-foreground text-balance sm:text-4xl">
+                  Community evangelism and discipleship for children and youth
+                </h2>
+                <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
+                  VBS reaches children and young people from different communities
+                  with practical love and clear Gospel teaching. We create a joyful
+                  environment where children are cared for, taught the Bible, and
+                  shown that Jesus loves them, sees them, and has a purpose for their lives.
+                </p>
+              </div>
+            </Reveal>
+            <Reveal delay={1}>
+              <div className="rounded-3xl border border-border bg-card p-8 shadow-sm">
+                <p className="text-sm font-semibold uppercase tracking-wider text-gold">
+                  Every VBS Season
+                </p>
+                <ul className="mt-5 space-y-4 text-muted-foreground">
+                  <li className="flex gap-3">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
+                    <span>We feed 500+ kids from different communities as an expression of Christ’s care.</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
+                    <span>We teach Bible fundamentals with a clear focus on salvation through Christ.</span>
+                  </li>
+                  <li className="flex gap-3">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
+                    <span>We use Bible storytelling that is simple, engaging, and memorable so truth sticks for life.</span>
+                  </li>
+                </ul>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      ) : null}
+
+      {isVbs ? (
+        <section className="bg-secondary/30 py-24">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="rounded-[2rem] border border-primary/10 bg-primary px-8 py-10 text-primary-foreground shadow-xl sm:px-10">
+              <Reveal>
+                <p className="font-heading text-sm font-semibold uppercase tracking-wider text-gold">
+                  Our Goal
+                </p>
+              </Reveal>
+              <Reveal delay={1}>
+                <h2 className="mt-3 font-heading text-3xl font-bold text-balance sm:text-4xl">
+                  Plant seeds of faith early in every young heart we can reach
+                </h2>
+              </Reveal>
+              <Reveal delay={2}>
+                <p className="mt-5 max-w-4xl text-lg leading-relaxed text-primary-foreground/85">
+                  Through VBS, children learn that Jesus loves them, sees them,
+                  and has a purpose for them. We believe that when truth is planted
+                  early, lives can be shaped for Christ for generations to come.
+                </p>
+              </Reveal>
+            </div>
+          </div>
+        </section>
+      ) : null}
 
       {isCatchThemYoung ? (
         <section className="bg-background py-24">

@@ -107,26 +107,26 @@ export const activities: ActivityItem[] = [
     title: 'Vacation Bible School (VBS)',
     slug: 'vocational-bible-studies',
     short:
-      'Equipping believers with scripture and practical skills for life and ministry.',
+      'Community evangelism and discipleship for children and youth through feeding, Bible teaching, and Gospel-centered care.',
     image: missionToYouthImage,
-    tagline: 'Faith and skill, working hand in hand',
+    tagline: 'Planting seeds of faith early in children and youth',
     intro:
-      'Our Vacation Bible School (VBS) helps children and young people grow in the Word of God through Bible lessons, worship, fellowship, and engaging learning activities. This ministry creates a joyful Christ-centered environment where lives are shaped early and faith is strengthened.',
+      'Vacation Bible School (VBS) is our community evangelism and discipleship program for children and youth. Each season, we create a Christ-centered space where young hearts are welcomed, nourished, and taught the truth of the Gospel in ways they can understand and remember for life.',
     scripture:
-      'Whatever you do, work heartily, as for the Lord and not for men.',
-    scriptureRef: 'Colossians 3:23',
+      'Suffer the little children to come unto me, and forbid them not: for of such is the kingdom of God.',
+    scriptureRef: 'Mark 10:14',
     highlights: [
       {
-        title: 'In-Depth Bible Teaching',
-        text: 'Systematic study of scripture for spiritual depth and understanding.',
+        title: 'Feed 500+ Children',
+        text: 'We meet physical needs by feeding children from different communities, opening hearts to hear the Gospel with joy and trust.',
       },
       {
-        title: 'Skills Training',
-        text: 'Practical vocational training to empower and dignify lives.',
+        title: 'Teach Bible Fundamentals',
+        text: 'We teach the truth of Scripture with a clear focus on salvation through Jesus Christ and the foundations of faith.',
       },
       {
-        title: 'Kingdom Impact',
-        text: 'Releasing believers to be salt and light in the marketplace.',
+        title: 'Bible Storytelling',
+        text: 'We use simple, engaging, and memorable Bible storytelling so God’s truth stays with children for life.',
       },
     ],
   },
