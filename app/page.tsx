@@ -141,10 +141,11 @@ export default function HomePage() {
           </Reveal>
           <Reveal delay={2}>
             <p className="mt-5 text-lg leading-relaxed text-muted-foreground">
-              Jesus passion for Souls (JP4S) is an interdenominational
-              Evangelistic movement that seeks to fulfil the Great commission
-              through Spirit-led Evangelism, strategic church planting,
-              intentional discipleship, and meeting needs to reach the world.
+              Jesus Passion for Souls Movement (JP4SM) is an
+              interdenominational Evangelistic movement that seeks to fulfil
+              the Great commission through Spirit-led Evangelism, strategic
+              church planting, intentional discipleship, and meeting needs to
+              reach the world.
             </p>
           </Reveal>
         </div>

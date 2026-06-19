@@ -8,7 +8,7 @@ import { Reveal } from '@/components/reveal'
 import { CtaBand } from '@/components/cta-band'
 
 const missionStatement =
-  'Jesus passion for Souls (JP4S) is an interdenominational Evangelistic movement that seeks to fulfil the Great commission through Spirit-led Evangelism, strategic church planting, intentional discipleship, and meeting needs to reach the world.'
+  'Jesus Passion for Souls Movement (JP4SM) is an interdenominational Evangelistic movement that seeks to fulfil the Great commission through Spirit-led Evangelism, strategic church planting, intentional discipleship, and meeting needs to reach the world.'
 
 const visionStatement =
   'To reach everyone everywhere with the gospel of Jesus Christ, plant churches, and transform lives and society through the power of the gospel.'
