@@ -184,48 +184,67 @@
   .animate-attention-blink {
     animation: attention-blink 1.3s ease-in-out infinite;
   }
-  @keyframes text-reveal-different-directions {
+  @keyframes text-extrusion-enter {
     0% {
       opacity: 0;
-      transform: translate3d(var(--x, 0), var(--y, 0), 0) rotate(var(--r, 0deg));
-      filter: blur(8px);
+      transform: translate3d(0, 52px, -140px) rotateX(68deg) rotateZ(-9deg)
+        scale(0.82);
+      filter: blur(12px);
+    }
+    55% {
+      opacity: 1;
+      transform: translate3d(0, -6px, 18px) rotateX(-12deg) rotateZ(1deg)
+        scale(1.02);
+      filter: blur(0);
     }
     100% {
       opacity: 1;
-      transform: translate3d(0, 0, 0) rotate(0deg);
+      transform: translate3d(0, 0, 0) rotateX(0deg) rotateZ(0deg) scale(1);
       filter: blur(0);
     }
   }
   .text-reveal-different-directions {
     display: inline-flex;
     flex-wrap: wrap;
-    gap: 0.35ch;
+    gap: 0.32ch;
     vertical-align: baseline;
+    perspective: 1200px;
   }
   .text-reveal-word {
-    display: inline-block;
+    position: relative;
+    display: inline-grid;
+    place-items: center;
+    padding: 0 0.12em 0.2em 0;
+    transform-style: preserve-3d;
     opacity: 0;
-    animation: text-reveal-different-directions 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: text-extrusion-enter 1.1s cubic-bezier(0.2, 0.9, 0.2, 1)
+      forwards;
+    animation-delay: var(--word-delay, 0s);
     will-change: transform, opacity, filter;
   }
-  .text-reveal-word.from-left {
-    --x: -28px;
-    --y: 6px;
-    --r: -6deg;
+  .text-reveal-word > span {
+    grid-area: 1 / 1;
+    white-space: nowrap;
   }
-  .text-reveal-word.from-right {
-    --x: 28px;
-    --y: -4px;
-    --r: 6deg;
+  .text-extrusion-layer {
+    z-index: 0;
+    color: rgb(111 74 10 / 0.9);
+    transform: translate(
+      calc(var(--layer-depth, 1) * 2px),
+      calc(var(--layer-depth, 1) * 2px)
+    );
+    opacity: calc(1 - (var(--layer-depth, 1) * 0.08));
+    text-shadow:
+      0 0 1px rgb(255 224 130 / 0.15),
+      0 6px 16px rgb(0 0 0 / 0.18);
+    user-select: none;
+    pointer-events: none;
   }
-  .text-reveal-word.from-top {
-    --x: 0;
-    --y: -30px;
-    --r: -4deg;
-  }
-  .text-reveal-word.from-bottom {
-    --x: 0;
-    --y: 30px;
-    --r: 4deg;
+  .text-extrusion-front {
+    position: relative;
+    z-index: 2;
+    text-shadow:
+      0 0 16px rgb(255 213 79 / 0.2),
+      0 8px 18px rgb(0 0 0 / 0.2);
   }
 }

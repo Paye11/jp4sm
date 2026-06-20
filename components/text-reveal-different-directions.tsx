@@ -1,9 +1,11 @@
+import type { CSSProperties } from 'react'
+
 type TextRevealDifferentDirectionsProps = {
   text: string
   className?: string
 }
 
-const directions = ['from-left', 'from-top', 'from-right', 'from-bottom'] as const
+const extrusionLayers = 7
 
 export function TextRevealDifferentDirections({
   text,
@@ -19,11 +21,28 @@ export function TextRevealDifferentDirections({
       {words.map((word, index) => (
         <span
           key={`${word}-${index}`}
-          className={`text-reveal-word ${directions[index % directions.length]}`}
-          style={{ animationDelay: `${0.18 + index * 0.14}s` }}
+          className="text-reveal-word"
+          style={
+            {
+              '--word-delay': `${0.12 + index * 0.16}s`,
+            } as CSSProperties
+          }
           aria-hidden="true"
         >
-          {word}
+          {Array.from({ length: extrusionLayers }).map((_, layerIndex) => (
+            <span
+              key={`${word}-${index}-layer-${layerIndex + 1}`}
+              className="text-extrusion-layer"
+              style={
+                {
+                  '--layer-depth': layerIndex + 1,
+                } as CSSProperties
+              }
+            >
+              {word}
+            </span>
+          ))}
+          <span className="text-extrusion-front">{word}</span>
         </span>
       ))}
     </span>
