@@ -17,6 +17,7 @@ import { Reveal } from '@/components/reveal'
 import { HeroBackgroundSlideshow } from '@/components/hero-background-slideshow'
 import { HeroActionButtons } from '@/components/hero-action-buttons'
 import { FounderStorySection } from '@/components/founder-story-section'
+import { TextRevealDifferentDirections } from '@/components/text-reveal-different-directions'
 import { Button } from '@/components/ui/button'
 import { CtaBand } from '@/components/cta-band'
 import { activities } from '@/lib/nav'
@@ -85,7 +86,10 @@ export default function HomePage() {
             <Reveal delay={1}>
               <h1 className="mt-6 font-heading text-4xl font-bold leading-[1.1] text-primary-foreground text-balance sm:text-6xl lg:text-7xl">
                 Reaching everyone everywhere with the{' '}
-                <span className="text-gold">Gospel of Jesus Christ</span>
+                <TextRevealDifferentDirections
+                  text="Gospel of Jesus Christ"
+                  className="text-gold"
+                />
               </h1>
             </Reveal>
             <Reveal delay={2}>

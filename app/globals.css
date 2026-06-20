@@ -184,4 +184,48 @@
   .animate-attention-blink {
     animation: attention-blink 1.3s ease-in-out infinite;
   }
+  @keyframes text-reveal-different-directions {
+    0% {
+      opacity: 0;
+      transform: translate3d(var(--x, 0), var(--y, 0), 0) rotate(var(--r, 0deg));
+      filter: blur(8px);
+    }
+    100% {
+      opacity: 1;
+      transform: translate3d(0, 0, 0) rotate(0deg);
+      filter: blur(0);
+    }
+  }
+  .text-reveal-different-directions {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.35ch;
+    vertical-align: baseline;
+  }
+  .text-reveal-word {
+    display: inline-block;
+    opacity: 0;
+    animation: text-reveal-different-directions 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    will-change: transform, opacity, filter;
+  }
+  .text-reveal-word.from-left {
+    --x: -28px;
+    --y: 6px;
+    --r: -6deg;
+  }
+  .text-reveal-word.from-right {
+    --x: 28px;
+    --y: -4px;
+    --r: 6deg;
+  }
+  .text-reveal-word.from-top {
+    --x: 0;
+    --y: -30px;
+    --r: -4deg;
+  }
+  .text-reveal-word.from-bottom {
+    --x: 0;
+    --y: 30px;
+    --r: 4deg;
+  }
 }
