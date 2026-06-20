@@ -21,6 +21,16 @@ const team = [
     role: 'Executive Director - Founder',
     image: founderImage,
     bio: 'Carries the founding vision of JP4SM with a lifelong passion for the lost.',
+    profile: {
+      positions: [
+        'Founder & General Overseer, Christ Brazen Assembly (CBA) Church',
+        'Executive Director, Jesus Passion for Souls Movement (JP4SM)',
+      ],
+      education: [
+        'Bachelor of Theology, B.Th. — Monrovia Bible College, MBC / Carver Christian University-Brainerd Johnson College of Theology, Paynesville, Liberia',
+        'Advanced Diploma in Theology — Monrovia Bible Training Center (MBTC)',
+      ],
+    },
   },
   {
     name: 'Pastor Patick Kamara',
@@ -33,6 +43,22 @@ const team = [
     role: 'Finance & Administration Officer',
     image: karnueImage,
     bio: 'Supports the ministry through faithful financial stewardship and sound administrative coordination.',
+    profile: {
+      positions: [
+        'General Administrator for General Administration at Christ Brazen Assembly Church',
+        'Food Technologist & Fisheries Quality Assurance Professional, National Fisheries and Aquaculture Authority of Liberia (NaFAA)',
+      ],
+      education: [
+        'BSc in Agronomy — Nha Trang University, Vietnam',
+        'MSc in Food Technology (Focus: Fish Processing) — Nha Trang University, Vietnam',
+      ],
+      overview: [
+        'Bro. Sonkarlay Karnue serves as General Administrator for General Administration at Christ Brazen Assembly Church, a ministry he has been part of since its founding, with over 16 years of dedicated service.',
+        'He supports church leadership in administrative affairs, documentation, communication, planning, church records, ministry reporting, and the smooth running of church programs and activities.',
+        'He is actively involved in leadership support, evangelism, departmental coordination, and the strengthening of church administration, reflecting commitment, order, accountability, and dedication to the advancement of God’s Kingdom.',
+        'Professionally, Bro. Karnue is a Food Technologist and Fisheries Quality Assurance Professional with the National Fisheries and Aquaculture Authority of Liberia (NaFAA), contributing to food safety, research, inspection, and regulatory development in the fisheries sector.',
+      ],
+    },
   },
   {
     name: 'Pastor Faith T. Gleekia',
@@ -92,9 +118,62 @@ export default function TeamPage() {
                     <p className="mt-1 text-sm font-semibold uppercase tracking-wider text-gold">
                       {member.role}
                     </p>
-                    <p className="text-sm leading-relaxed text-muted-foreground">
+                    <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
                       {member.bio}
                     </p>
+                    <details className="mt-5 text-left">
+                      <summary className="cursor-pointer list-none rounded-full border border-primary/15 bg-secondary px-4 py-2 text-center text-sm font-semibold text-primary transition-colors hover:bg-secondary/80">
+                        Read Profile
+                      </summary>
+                      <div className="mt-4 rounded-2xl border border-border bg-background p-4 text-sm leading-relaxed text-muted-foreground">
+                        {member.profile ? (
+                          <div className="space-y-4">
+                            <div>
+                              <p className="font-semibold uppercase tracking-wider text-gold">
+                                Leadership Roles
+                              </p>
+                              <ul className="mt-2 space-y-2">
+                                {member.profile.positions.map((position) => (
+                                  <li key={position} className="flex gap-2">
+                                    <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-gold" />
+                                    <span>{position}</span>
+                                  </li>
+                                ))}
+                              </ul>
+                            </div>
+                            <div>
+                              <p className="font-semibold uppercase tracking-wider text-gold">
+                                Education
+                              </p>
+                              <ol className="mt-2 space-y-2">
+                                {member.profile.education.map((item, index) => (
+                                  <li key={item} className="flex gap-2">
+                                    <span className="font-semibold text-foreground">
+                                      {index + 1}.
+                                    </span>
+                                    <span>{item}</span>
+                                  </li>
+                                ))}
+                              </ol>
+                            </div>
+                            {member.profile.overview ? (
+                              <div>
+                                <p className="font-semibold uppercase tracking-wider text-gold">
+                                  Profile
+                                </p>
+                                <div className="mt-2 space-y-3">
+                                  {member.profile.overview.map((paragraph) => (
+                                    <p key={paragraph}>{paragraph}</p>
+                                  ))}
+                                </div>
+                              </div>
+                            ) : null}
+                          </div>
+                        ) : (
+                          <p>Full profile details will be added soon.</p>
+                        )}
+                      </div>
+                    </details>
                   </div>
                 </div>
               </Reveal>
