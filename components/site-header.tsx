@@ -46,6 +46,7 @@ export function SiteHeader() {
               alt="JP4SM logo"
               width={48}
               height={48}
+              priority
               className="h-11 w-11 object-contain"
             />
           </span>

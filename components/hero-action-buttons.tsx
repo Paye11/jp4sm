@@ -2,10 +2,10 @@
 
 import { useEffect, useState, type FormEvent } from 'react'
 import { createPortal } from 'react-dom'
-import { HandCoins, HeartHandshake, Mail, MapPin, Phone, User, X } from 'lucide-react'
+import { CheckCircle2, HandCoins, HeartHandshake, Mail, MapPin, Phone, User, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import { siteContactEmail, siteDonateLink } from '@/lib/site-contact'
+import { siteDonateLink } from '@/lib/site-contact'
 
 type HeroActionButtonsProps = {
   className?: string
@@ -24,6 +24,8 @@ export function HeroActionButtons({ className }: HeroActionButtonsProps) {
   const [isPrayerFormOpen, setIsPrayerFormOpen] = useState(false)
   const [showDonateMessage, setShowDonateMessage] = useState(false)
   const [form, setForm] = useState(initialForm)
+  const [submitState, setSubmitState] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle')
+  const [submitMessage, setSubmitMessage] = useState('')
 
   useEffect(() => {
     setMounted(true)
@@ -49,26 +51,46 @@ export function HeroActionButtons({ className }: HeroActionButtonsProps) {
     }
   }, [isPrayerFormOpen])
 
-  const handlePrayerSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const closePrayerForm = () => {
+    setIsPrayerFormOpen(false)
+    setSubmitState('idle')
+    setSubmitMessage('')
+  }
+
+  const handlePrayerSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
 
-    const subject = `Prayer Request from ${form.name || 'Website Visitor'}`
-    const body = [
-      'Prayer Request Submission',
-      '',
-      `Name: ${form.name}`,
-      `Email: ${form.email}`,
-      `Phone: ${form.phone || 'Not provided'}`,
-      `Location: ${form.location || 'Not provided'}`,
-      '',
-      'Prayer Request:',
-      form.request,
-    ].join('\n')
+    setSubmitState('submitting')
+    setSubmitMessage('')
 
-    window.location.href = `mailto:${siteContactEmail}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+    try {
+      const response = await fetch('/api/prayer-request', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(form),
+      })
 
-    setForm(initialForm)
-    setIsPrayerFormOpen(false)
+      const result = (await response.json()) as { message?: string }
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Unable to submit your prayer request right now.')
+      }
+
+      setForm(initialForm)
+      setSubmitState('success')
+      setSubmitMessage(
+        result.message || 'Prayer request submitted successfully. We will pray with you shortly.',
+      )
+    } catch (error) {
+      setSubmitState('error')
+      setSubmitMessage(
+        error instanceof Error
+          ? error.message
+          : 'Unable to submit your prayer request right now.',
+      )
+    }
   }
 
   const handleDonateClick = () => {
@@ -98,7 +120,11 @@ export function HeroActionButtons({ className }: HeroActionButtonsProps) {
             type="button"
             size="lg"
             variant="outline"
-            onClick={() => setIsPrayerFormOpen(true)}
+            onClick={() => {
+              setSubmitState('idle')
+              setSubmitMessage('')
+              setIsPrayerFormOpen(true)
+            }}
             className="animate-attention-blink rounded-full border-primary-foreground/30 bg-primary-foreground/10 px-6 text-primary-foreground shadow-lg shadow-primary/20 hover:bg-primary-foreground/18 hover:text-primary-foreground [animation-delay:0.2s]"
           >
             <HeartHandshake className="mr-1 h-4 w-4" />
@@ -138,120 +164,173 @@ export function HeroActionButtons({ className }: HeroActionButtonsProps) {
                     <button
                       type="button"
                       className="shrink-0 rounded-full border border-primary-foreground/20 p-2 text-primary-foreground/80 transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground"
-                      onClick={() => setIsPrayerFormOpen(false)}
+                      onClick={closePrayerForm}
                       aria-label="Close prayer request form"
                     >
                       <X className="h-5 w-5" />
                     </button>
                   </div>
 
-                  <form
-                    className="flex-1 overflow-y-auto bg-card p-5 sm:p-6"
-                    onSubmit={handlePrayerSubmit}
-                  >
-                    <div className="space-y-5">
-                      <div className="grid gap-5 sm:grid-cols-2">
-                        <label className="space-y-2">
-                          <span className="flex items-center gap-2 text-sm font-medium text-foreground">
-                            <User className="h-4 w-4 text-gold" />
-                            Full Name
-                          </span>
-                          <input
-                            type="text"
+                  {submitState === 'success' ? (
+                    <div className="flex flex-1 flex-col items-center justify-center gap-5 bg-card px-5 py-10 text-center sm:px-8">
+                      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-100 text-green-700">
+                        <CheckCircle2 className="h-8 w-8" />
+                      </div>
+                      <div className="space-y-2">
+                        <h4 className="font-heading text-2xl font-bold text-foreground">
+                          Prayer request submitted successfully
+                        </h4>
+                        <p className="max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base">
+                          {submitMessage}
+                        </p>
+                      </div>
+                      <div className="flex flex-col gap-3 sm:flex-row">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="lg"
+                          className="rounded-full"
+                          onClick={() => {
+                            setSubmitState('idle')
+                            setSubmitMessage('')
+                          }}
+                        >
+                          Submit Another Request
+                        </Button>
+                        <Button
+                          type="button"
+                          size="lg"
+                          className="rounded-full bg-gold text-gold-foreground hover:bg-gold/90"
+                          onClick={closePrayerForm}
+                        >
+                          Close
+                        </Button>
+                      </div>
+                    </div>
+                  ) : (
+                    <form
+                      className="flex-1 overflow-y-auto bg-card p-5 sm:p-6"
+                      onSubmit={handlePrayerSubmit}
+                    >
+                      <div className="space-y-5">
+                        {submitState === 'error' ? (
+                          <div className="rounded-2xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                            {submitMessage}
+                          </div>
+                        ) : null}
+
+                        <div className="grid gap-5 sm:grid-cols-2">
+                          <label className="space-y-2">
+                            <span className="flex items-center gap-2 text-sm font-medium text-foreground">
+                              <User className="h-4 w-4 text-gold" />
+                              Full Name
+                            </span>
+                            <input
+                              type="text"
+                              required
+                              value={form.name}
+                              onChange={(event) =>
+                                setForm((current) => ({ ...current, name: event.target.value }))
+                              }
+                              className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-foreground outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/15"
+                              placeholder="Enter your full name"
+                              disabled={submitState === 'submitting'}
+                            />
+                          </label>
+
+                          <label className="space-y-2">
+                            <span className="flex items-center gap-2 text-sm font-medium text-foreground">
+                              <Mail className="h-4 w-4 text-gold" />
+                              Email Address
+                            </span>
+                            <input
+                              type="email"
+                              required
+                              value={form.email}
+                              onChange={(event) =>
+                                setForm((current) => ({ ...current, email: event.target.value }))
+                              }
+                              className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-foreground outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/15"
+                              placeholder="Enter your email"
+                              disabled={submitState === 'submitting'}
+                            />
+                          </label>
+
+                          <label className="space-y-2">
+                            <span className="flex items-center gap-2 text-sm font-medium text-foreground">
+                              <Phone className="h-4 w-4 text-gold" />
+                              Phone Number
+                            </span>
+                            <input
+                              type="tel"
+                              value={form.phone}
+                              onChange={(event) =>
+                                setForm((current) => ({ ...current, phone: event.target.value }))
+                              }
+                              className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-foreground outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/15"
+                              placeholder="Optional"
+                              disabled={submitState === 'submitting'}
+                            />
+                          </label>
+
+                          <label className="space-y-2">
+                            <span className="flex items-center gap-2 text-sm font-medium text-foreground">
+                              <MapPin className="h-4 w-4 text-gold" />
+                              Location
+                            </span>
+                            <input
+                              type="text"
+                              value={form.location}
+                              onChange={(event) =>
+                                setForm((current) => ({ ...current, location: event.target.value }))
+                              }
+                              className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-foreground outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/15"
+                              placeholder="City / Country"
+                              disabled={submitState === 'submitting'}
+                            />
+                          </label>
+                        </div>
+
+                        <label className="block space-y-2">
+                          <span className="text-sm font-medium text-foreground">Prayer Request</span>
+                          <textarea
                             required
-                            value={form.name}
+                            value={form.request}
                             onChange={(event) =>
-                              setForm((current) => ({ ...current, name: event.target.value }))
+                              setForm((current) => ({ ...current, request: event.target.value }))
                             }
-                            className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-foreground outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/15"
-                            placeholder="Enter your full name"
-                          />
-                        </label>
-
-                        <label className="space-y-2">
-                          <span className="flex items-center gap-2 text-sm font-medium text-foreground">
-                            <Mail className="h-4 w-4 text-gold" />
-                            Email Address
-                          </span>
-                          <input
-                            type="email"
-                            required
-                            value={form.email}
-                            onChange={(event) =>
-                              setForm((current) => ({ ...current, email: event.target.value }))
-                            }
-                            className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-foreground outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/15"
-                            placeholder="Enter your email"
-                          />
-                        </label>
-
-                        <label className="space-y-2">
-                          <span className="flex items-center gap-2 text-sm font-medium text-foreground">
-                            <Phone className="h-4 w-4 text-gold" />
-                            Phone Number
-                          </span>
-                          <input
-                            type="tel"
-                            value={form.phone}
-                            onChange={(event) =>
-                              setForm((current) => ({ ...current, phone: event.target.value }))
-                            }
-                            className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-foreground outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/15"
-                            placeholder="Optional"
-                          />
-                        </label>
-
-                        <label className="space-y-2">
-                          <span className="flex items-center gap-2 text-sm font-medium text-foreground">
-                            <MapPin className="h-4 w-4 text-gold" />
-                            Location
-                          </span>
-                          <input
-                            type="text"
-                            value={form.location}
-                            onChange={(event) =>
-                              setForm((current) => ({ ...current, location: event.target.value }))
-                            }
-                            className="w-full rounded-2xl border border-border bg-background px-4 py-3 text-foreground outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/15"
-                            placeholder="City / Country"
+                            rows={7}
+                            className="w-full resize-y rounded-2xl border border-border bg-background px-4 py-3 text-foreground outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/15"
+                            placeholder="Write your prayer request here"
+                            disabled={submitState === 'submitting'}
                           />
                         </label>
                       </div>
 
-                      <label className="block space-y-2">
-                        <span className="text-sm font-medium text-foreground">Prayer Request</span>
-                        <textarea
-                          required
-                          value={form.request}
-                          onChange={(event) =>
-                            setForm((current) => ({ ...current, request: event.target.value }))
-                          }
-                          rows={7}
-                          className="w-full resize-y rounded-2xl border border-border bg-background px-4 py-3 text-foreground outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/15"
-                          placeholder="Write your prayer request here"
-                        />
-                      </label>
-                    </div>
-
-                    <div className="sticky bottom-0 mt-6 flex flex-col gap-3 border-t border-border bg-card pt-4 sm:flex-row sm:justify-end">
-                      <Button
-                        type="button"
-                        variant="outline"
-                        size="lg"
-                        className="rounded-full"
-                        onClick={() => setIsPrayerFormOpen(false)}
-                      >
-                        Cancel
-                      </Button>
-                      <Button
-                        type="submit"
-                        size="lg"
-                        className="rounded-full bg-gold text-gold-foreground hover:bg-gold/90"
-                      >
-                        Submit Prayer Request
-                      </Button>
-                    </div>
-                  </form>
+                      <div className="sticky bottom-0 mt-6 flex flex-col gap-3 border-t border-border bg-card pt-4 sm:flex-row sm:justify-end">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="lg"
+                          className="rounded-full"
+                          onClick={closePrayerForm}
+                          disabled={submitState === 'submitting'}
+                        >
+                          Cancel
+                        </Button>
+                        <Button
+                          type="submit"
+                          size="lg"
+                          className="rounded-full bg-gold text-gold-foreground hover:bg-gold/90"
+                          disabled={submitState === 'submitting'}
+                        >
+                          {submitState === 'submitting'
+                            ? 'Submitting Prayer Request...'
+                            : 'Submit Prayer Request'}
+                        </Button>
+                      </div>
+                    </form>
+                  )}
                 </div>
               </div>
             </div>,
