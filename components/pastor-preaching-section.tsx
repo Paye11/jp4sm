@@ -63,7 +63,8 @@ export function PastorPreachingSection() {
           <Reveal delay={1}>
             <FacebookVideoEmbed
               href={PASTOR_PREACHING_VIDEO_URL}
-              title="Rev. Sylvester Gleekia preaching the Gospel"
+              coverSrc="/images/pastor-preaching-cover.png"
+              title="Rev. Sylvester Gleekia preaching the Gospel on OK FM 99.5"
             />
           </Reveal>
         </div>
