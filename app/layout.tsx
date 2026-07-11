@@ -17,6 +17,9 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? 'https://jp4sm.com',
+  ),
   title: 'JP4SM — Jesus\' Passion for Souls Movement',
   description:
     'Jesus\' Passion for Souls Movement (JP4SM) is a Gospel organization committed to evangelism, discipleship, church planting, and reaching the lost with the love of Christ.',
