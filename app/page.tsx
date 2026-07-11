@@ -17,6 +17,7 @@ import { Reveal } from '@/components/reveal'
 import { HeroBackgroundSlideshow } from '@/components/hero-background-slideshow'
 import { HeroActionButtons } from '@/components/hero-action-buttons'
 import { FounderStorySection } from '@/components/founder-story-section'
+import { PastorPreachingSection } from '@/components/pastor-preaching-section'
 import { TextRevealDifferentDirections } from '@/components/text-reveal-different-directions'
 import { Button } from '@/components/ui/button'
 import { CtaBand } from '@/components/cta-band'
@@ -156,6 +157,8 @@ export default function HomePage() {
       </section>
 
       <FounderStorySection />
+
+      <PastorPreachingSection />
 
       {/* Core focus */}
       <section className="bg-secondary/40 py-24">
