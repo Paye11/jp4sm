@@ -33,10 +33,19 @@ const team = [
     },
   },
   {
-    name: 'Pastor Patick Kamara',
+    name: 'Pastor Patrick Kamara',
     role: 'Director of Evangelism & Missions',
     image: kamaraImage,
     bio: 'Leads gospel outreach and mission efforts with a burden to reach souls and strengthen the harvest field.',
+    profile: {
+      positions: [
+        'Director of Evangelism & Missions, Jesus Passion for Souls Movement (JP4SM)',
+      ],
+      education: [
+        "Bachelor's Degree in Primary Education — Njala University, University of Sierra Leone",
+        "Bachelor's Degree in Theology — Spiritual Life Bible College, Liberia",
+      ],
+    },
   },
   {
     name: 'Mr. Sonkarlay Karnue',
@@ -61,10 +70,22 @@ const team = [
     },
   },
   {
-    name: 'Pastor Faith T. Gleekia',
+    name: 'Pastor Faith Teewon Gleekia',
     role: 'Strategic Planning & Development Officer',
     image: glekeaImage,
     bio: 'Helps guide ministry growth through planning, coordination, and development strategies that support the mission.',
+    profile: {
+      positions: [
+        'Strategic Planning & Development Officer, Jesus Passion for Souls Movement (JP4SM)',
+      ],
+      education: [
+        'Master of Arts in Policy Economics — Center of Development Economics, Williams College, Massachusetts, USA',
+        'Master of Business Administration in Banking and Finance — Cottington University School of Graduate and Professional Studies, Monrovia, Liberia',
+        'Bachelor of Science in Economics — United Methodist University, Monrovia, Liberia',
+        'Certified Fraud Examiner (CFE)',
+        'Certified Anti-Money Laundering Specialist (CAMS)',
+      ],
+    },
   },
   {
     name: 'Mr. Ellison Chea',
