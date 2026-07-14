@@ -17,6 +17,7 @@ import { Reveal } from '@/components/reveal'
 import { HeroBackgroundSlideshow } from '@/components/hero-background-slideshow'
 import { HeroActionButtons } from '@/components/hero-action-buttons'
 import { FounderStorySection } from '@/components/founder-story-section'
+import { MinistryVideoSection } from '@/components/ministry-video-section'
 import { PastorPreachingSection } from '@/components/pastor-preaching-section'
 import { TextRevealDifferentDirections } from '@/components/text-reveal-different-directions'
 import { Button } from '@/components/ui/button'
@@ -155,6 +156,8 @@ export default function HomePage() {
           </Reveal>
         </div>
       </section>
+
+      <MinistryVideoSection />
 
       <FounderStorySection />
 
